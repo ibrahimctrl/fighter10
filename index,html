@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EURO</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Consolas, monospace;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* overlay */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(3px);
+    z-index:-1;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+}
+
+/* container */
+.container{
+    position:relative;
+    z-index:2;
+}
+
+/* LOGO IMAGE */
+.logo img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+
+    border:2px solid red;
+    border-radius:8px;
+    box-shadow:0 0 15px rgba(255,0,0,0.5);
+    margin-bottom:15px;
+}
+
+.title{
+    font-size:42px;
+    color:red;
+    margin-bottom:20px;
+}
+
+.link{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.link a{
+    color:red;
+    text-decoration:none;
+}
+
+.msg{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+/* info box */
+.info{
+    font-size:20px;
+    line-height:1.8;
+    color:#ffb3b3;
+
+    background: rgba(0, 0, 0, 0.35);
+    border: 2px solid red;
+    border-radius: 12px;
+
+    padding: 15px 20px;
+    display: inline-block;
+
+    box-shadow: 0 0 15px rgba(255,0,0,0.4);
+}
+
+.warning{
+    margin-top:30px;
+    font-size:34px;
+    color:red;
+    text-shadow: 0 0 10px red;
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video class="video-bg" autoplay muted loop>
+    <source src="dst.mp4" type="video/mp4">
+</video>
+
+<!-- OVERLAY -->
+<div class="overlay"></div>
+
+<!-- AUDIO -->
+<audio id="bgmusic" autoplay loop>
+    <source src="dst.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <!-- IMAGE LOGO -->
+    <div class="logo">
+        <img src="img.jpg" alt="logo">
+    </div>
+
+    <div class="title">Hacked By EURO</div>
+
+    <div class="link">
+        <a href="https://discord.gg/P26DrYx9" target="_blank">
+            Discord.gg/P26DrYx9
+        </a>
+    </div>
+
+    <div class="msg">
+        EURO owns the server
+    </div>
+
+    <div class="info">
+        Your IP Address: <span id="ip">loading...</span><br><br>
+
+        {
+        <br>"city": <span id="city">loading...</span>,
+        <br>"country": <span id="country">loading...</span>,
+        <br>"region": <span id="region">loading...</span>,
+        <br>"timezone": "Asia/Nicosia"
+        <br>}
+    </div>
+
+    <div class="warning">
+        Oops, your server is down!
+    </div>
+</div>
+
+
+
+<script>
+fetch("https://ipapi.co/json/")
+.then(res => res.json())
+.then(data => {
+    document.getElementById("ip").innerText = data.ip;
+    document.getElementById("city").innerText = data.city;
+    document.getElementById("country").innerText = data.country_name;
+    document.getElementById("isp").innerText = data.org;
+})
+.catch(() => {
+    document.getElementById("ip").innerText = "Unavailable";
+});
+</script>
+
+</body>
+</html>
